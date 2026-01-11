@@ -1,0 +1,488 @@
+/* =============================================
+   Mobile Calculator - Professional Styling
+   Mobile-First Responsive Design
+   Dark Theme with Modern Gradients
+   ============================================= */
+
+/* =============================================
+   CSS Variables (Design Tokens)
+   ============================================= */
+:root {
+  /* Color Palette */
+  --color-bg-primary: #0f1419;
+  --color-bg-secondary: #1a1f2e;
+  --color-bg-tertiary: #252d3d;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b0b8c8;
+  
+  /* Gradient Colors */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  
+  /* Button Colors */
+  --color-btn-default: #2d3748;
+  --color-btn-default-hover: #3d4758;
+  --color-btn-operator: #667eea;
+  --color-btn-operator-hover: #764ba2;
+  --color-btn-equals: #f093fb;
+  --color-btn-equals-hover: #f5576c;
+  --color-btn-clear: #ef5350;
+  --color-btn-clear-hover: #d32f2f;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  
+  /* Font Family */
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================================
+   Reset & Base Styles
+   ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =============================================
+   Container & Layout
+   ============================================= */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.6s ease;
+}
+
+/* =============================================
+   Display & Screen
+   ============================================= */
+.display {
+  width: 100%;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(26, 31, 46, 0.8), rgba(37, 45, 61, 0.8));
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: var(--radius-lg);
+  text-align: right;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  word-wrap: break-word;
+  word-break: break-all;
+  min-height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  line-height: 1.2;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-inner);
+}
+
+.display:focus {
+  outline: none;
+  border-color: rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, rgba(26, 31, 46, 1), rgba(37, 45, 61, 1));
+}
+
+.display-empty {
+  color: var(--color-text-secondary);
+}
+
+/* =============================================
+   Button Grid
+   ============================================= */
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+/* =============================================
+   Button Styles
+   ============================================= */
+button {
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform, box-shadow;
+}
+
+/* Default Buttons (Numbers) */
+button:not(.operator):not(.equals):not(.clear):not(.delete) {
+  background-color: var(--color-btn-default);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+button:not(.operator):not(.equals):not(.clear):not(.delete):hover {
+  background-color: var(--color-btn-default-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button:not(.operator):not(.equals):not(.clear):not(.delete):active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* Operator Buttons */
+button.operator {
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+button.operator:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button.operator:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* Equals Button */
+button.equals {
+  background: var(--gradient-secondary);
+  color: var(--color-text-primary);
+  grid-column: span 2;
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-md);
+}
+
+button.equals:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button.equals:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* Clear Button */
+button.clear {
+  background-color: var(--color-btn-clear);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-md);
+}
+
+button.clear:hover {
+  background-color: var(--color-btn-clear-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button.clear:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* Delete Button */
+button.delete {
+  background-color: var(--color-btn-default);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  box-shadow: var(--shadow-md);
+}
+
+button.delete:hover {
+  background-color: var(--color-btn-default-hover);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button.delete:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* =============================================
+   Button Ripple Effect
+   ============================================= */
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--transition-fast), height var(--transition-fast);
+  pointer-events: none;
+}
+
+button:active::before {
+  width: 300px;
+  height: 300px;
+  transition: none;
+}
+
+/* =============================================
+   Animations
+   ============================================= */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: var(--shadow-md);
+  }
+  50% {
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: var(--shadow-lg);
+  }
+  50% {
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+  }
+}
+
+/* =============================================
+   Utility Classes
+   ============================================= */
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* =============================================
+   Accessibility
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-primary: #f5f7fa;
+    --color-bg-secondary: #ffffff;
+    --color-bg-tertiary: #e8ecf1;
+    --color-text-primary: #0f1419;
+    --color-text-secondary: #6b7280;
+    --color-btn-default: #e5e7eb;
+    --color-btn-default-hover: #d1d5db;
+  }
+  
+  .display {
+    background: linear-gradient(135deg, rgba(245, 247, 250, 0.8), rgba(232, 236, 241, 0.8));
+    border: 1px solid rgba(102, 126, 234, 0.2);
+  }
+}
+
+/* =============================================
+   Tablet Responsive Design
+   ============================================= */
+@media (min-width: 768px) {
+  .container {
+    padding: var(--spacing-xl);
+  }
+  
+  .calculator-wrapper {
+    max-width: 450px;
+    padding: var(--spacing-2xl);
+  }
+  
+  button {
+    padding: var(--spacing-xl);
+    font-size: var(--font-size-xl);
+  }
+  
+  .display {
+    font-size: 2.5rem;
+    min-height: 100px;
+    padding: var(--spacing-xl);
+  }
+}
+
+/* =============================================
+   Desktop Responsive Design
+   ============================================= */
+@media (min-width: 1024px) {
+  .calculator-wrapper {
+    max-width: 500px;
+    transition: transform var(--transition-normal);
+  }
+  
+  .calculator-wrapper:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* =============================================
+   Touch Device Optimization
+   ============================================= */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    padding: 1.25rem;
+    min-width: 60px;
+    min-height: 60px;
+  }
+  
+  button:hover {
+    transform: none;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+}
+
+/* =============================================
+   Dark Mode (System Preference)
+   ============================================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: #0f1419;
+    --color-bg-secondary: #1a1f2e;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #b0b8c8;
+  }
+}
+
+/* =============================================
+   High Contrast Mode
+   ============================================= */
+@media (prefers-contrast: more) {
+  button {
+    border: 2px solid currentColor;
+  }
+  
+  .display {
+    border: 2px solid var(--color-text-primary);
+  }
+}
+
+/* =============================================
+   Print Styles
+   ============================================= */
+@media print {
+  body {
+    background: white;
+  }
+  
+  .calculator-wrapper {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    border: 1px solid #ccc;
+  }
+}
